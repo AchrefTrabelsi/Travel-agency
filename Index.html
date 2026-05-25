@@ -1,363 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Horizon Voyages — Travel Agency</title>
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet"/>
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet"/>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
-  <style>
-    :root {
-      --sky: #0d6e99;
-      --deep: #0a3d56;
-      --surf: #4db8d4;
-      --sand: #f4ede3;
-      --dusk: #e07b3a;
-      --white: #ffffff;
-      --text: #1a2b36;
-      --muted: #6c8a98;
-    }
-
-    * { scroll-behavior: smooth; }
-
-    body {
-      font-family: 'DM Sans', sans-serif;
-      background: var(--white);
-      color: var(--text);
-    }
-
-    h1, h2, h3, h4 {
-      font-family: 'Playfair Display', serif;
-    }
-
-    /* ── NAVBAR ── */
-    .navbar {
-      background: transparent !important;
-      padding: 1.4rem 0;
-      transition: background .35s, padding .35s;
-      position: absolute;
-      width: 100%;
-      z-index: 100;
-    }
-    .navbar.scrolled {
-      background: var(--deep) !important;
-      padding: .9rem 0;
-      position: fixed;
-      top: 0;
-      box-shadow: 0 4px 20px rgba(10,61,86,.3);
-    }
-    .navbar-brand {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.55rem;
-      color: var(--white) !important;
-      letter-spacing: .02em;
-    }
-    .navbar-brand span { color: var(--surf); }
-    .nav-link {
-      color: rgba(255,255,255,.8) !important;
-      font-size: .82rem;
-      letter-spacing: .1em;
-      text-transform: uppercase;
-      font-weight: 400;
-      margin: 0 .35rem;
-      transition: color .2s;
-    }
-    .nav-link:hover { color: var(--surf) !important; }
-    .navbar-toggler { border-color: rgba(255,255,255,.3); }
-    .navbar-toggler-icon { filter: invert(1); }
-
-    /* ── HERO ── */
-    .hero {
-      min-height: 100vh;
-      background: linear-gradient(
-          to bottom,
-          rgba(10,61,86,.65) 0%,
-          rgba(13,110,153,.35) 60%,
-          rgba(10,61,86,.8) 100%
-        ),
-        url('https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=1600&q=80') center/cover no-repeat;
-      display: flex;
-      align-items: center;
-      position: relative;
-      overflow: hidden;
-    }
-    .hero::after {
-      content: '';
-      position: absolute;
-      bottom: 0; left: 0; right: 0;
-      height: 130px;
-      background: linear-gradient(to top, var(--white), transparent);
-    }
-    .hero-inner { position: relative; z-index: 2; padding-top: 5rem; }
-    .hero-tag {
-      display: inline-block;
-      background: rgba(77,184,212,.2);
-      border: 1px solid rgba(77,184,212,.4);
-      color: var(--surf);
-      font-size: .72rem;
-      letter-spacing: .2em;
-      text-transform: uppercase;
-      padding: .35rem .9rem;
-      margin-bottom: 1.5rem;
-    }
-    .hero h1 {
-      font-size: clamp(3rem, 7vw, 6rem);
-      font-weight: 700;
-      color: var(--white);
-      line-height: 1.07;
-      margin-bottom: 1.4rem;
-    }
-    .hero h1 em { font-style: italic; color: var(--surf); }
-    .hero .lead {
-      color: rgba(255,255,255,.75);
-      font-size: 1.05rem;
-      font-weight: 300;
-      max-width: 520px;
-      line-height: 1.8;
-      margin-bottom: 2.5rem;
-    }
-    .btn-sky {
-      background: var(--dusk);
-      color: var(--white);
-      border: none;
-      padding: .9rem 2.8rem;
-      font-size: .8rem;
-      letter-spacing: .14em;
-      text-transform: uppercase;
-      border-radius: 2px;
-      font-family: 'DM Sans', sans-serif;
-      transition: background .25s, transform .2s;
-    }
-    .btn-sky:hover {
-      background: #c96a2d;
-      color: var(--white);
-      transform: translateY(-2px);
-    }
-    .btn-outline-sky {
-      background: transparent;
-      color: var(--white);
-      border: 1px solid rgba(255,255,255,.45);
-      padding: .85rem 2rem;
-      font-size: .8rem;
-      letter-spacing: .12em;
-      text-transform: uppercase;
-      border-radius: 2px;
-      transition: all .25s;
-    }
-    .btn-outline-sky:hover {
-      border-color: var(--surf);
-      color: var(--surf);
-    }
-
-    /* ── SECTIONS ── */
-    section { padding: 6rem 0; }
-    .section-label {
-      font-size: .7rem;
-      letter-spacing: .28em;
-      text-transform: uppercase;
-      color: var(--sky);
-      font-weight: 500;
-      display: block;
-      margin-bottom: .6rem;
-    }
-    .section-heading {
-      font-size: clamp(2rem, 4vw, 3.2rem);
-      font-weight: 700;
-      line-height: 1.1;
-      color: var(--text);
-    }
-    .divider {
-      width: 50px;
-      height: 2px;
-      background: var(--dusk);
-      margin: 1.2rem 0 2rem;
-    }
-    .divider.mx-auto { margin-left: auto; margin-right: auto; }
-
-    /* ── DESTINATIONS ── */
-    #destinations { background: var(--sand); }
-    .dest-card {
-      border: none;
-      border-radius: 4px;
-      overflow: hidden;
-      background: var(--white);
-      transition: transform .3s, box-shadow .3s;
-    }
-    .dest-card:hover {
-      transform: translateY(-7px);
-      box-shadow: 0 20px 45px rgba(10,61,86,.14);
-    }
-    .dest-card .img-wrap { position: relative; overflow: hidden; }
-    .dest-card img {
-      height: 220px;
-      object-fit: cover;
-      width: 100%;
-      transition: transform .5s ease;
-    }
-    .dest-card:hover img { transform: scale(1.07); }
-    .dest-badge {
-      position: absolute;
-      top: 14px; left: 14px;
-      background: var(--dusk);
-      color: var(--white);
-      font-size: .65rem;
-      letter-spacing: .12em;
-      text-transform: uppercase;
-      padding: .25rem .65rem;
-      border-radius: 2px;
-    }
-    .dest-card .card-body { padding: 1.5rem; }
-    .dest-card .card-title {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.3rem;
-      margin-bottom: .5rem;
-    }
-    .dest-card .card-text {
-      font-size: .85rem;
-      color: var(--muted);
-      line-height: 1.75;
-      margin-bottom: 1.2rem;
-    }
-    .btn-link-dest {
-      font-size: .78rem;
-      letter-spacing: .1em;
-      text-transform: uppercase;
-      color: var(--sky);
-      text-decoration: none;
-      font-weight: 500;
-      border-bottom: 1px solid var(--surf);
-      padding-bottom: 1px;
-      transition: color .2s, border-color .2s;
-    }
-    .btn-link-dest:hover { color: var(--deep); border-color: var(--deep); }
-
-    /* ── TOURS / ACCORDION ── */
-    #tours { background: var(--white); }
-    .accordion { border: none; }
-    .accordion-item {
-      border: none;
-      border-bottom: 1px solid rgba(10,61,86,.1);
-      border-radius: 0 !important;
-      background: transparent;
-    }
-    .accordion-button {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.15rem;
-      font-weight: 400;
-      color: var(--text);
-      background: transparent;
-      padding: 1.4rem 0;
-      box-shadow: none !important;
-      border-radius: 0 !important;
-    }
-    .accordion-button:not(.collapsed) {
-      background: transparent;
-      color: var(--sky);
-    }
-    .accordion-button::after {
-      filter: none;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill='%230d6e99' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3E%3C/svg%3E");
-    }
-    .accordion-body {
-      padding: 0 0 1.5rem;
-      font-size: .9rem;
-      color: var(--muted);
-      line-height: 1.85;
-    }
-    .accordion-body a {
-      color: var(--dusk);
-      font-size: .8rem;
-      letter-spacing: .1em;
-      text-transform: uppercase;
-      text-decoration: none;
-      font-weight: 500;
-      display: inline-block;
-      margin-top: 1rem;
-      border-bottom: 1px solid rgba(224,123,58,.4);
-      padding-bottom: 2px;
-    }
-    .tour-meta {
-      display: flex;
-      gap: 1.5rem;
-      margin-bottom: .8rem;
-    }
-    .tour-meta-item {
-      font-size: .72rem;
-      color: var(--sky);
-      letter-spacing: .1em;
-      text-transform: uppercase;
-      font-weight: 500;
-    }
-    .tour-meta-item i { margin-right: .3rem; }
-
-    /* ── CONTACT ── */
-    #contact { background: var(--deep); }
-    #contact .section-label { color: var(--surf); }
-    #contact .section-heading { color: var(--white); }
-    #contact p { color: rgba(255,255,255,.55); }
-    .travel-form .form-control,
-    .travel-form select.form-control {
-      background: rgba(255,255,255,.06);
-      border: 1px solid rgba(255,255,255,.12);
-      border-radius: 2px;
-      color: var(--white);
-      font-family: 'DM Sans', sans-serif;
-      padding: .85rem 1rem;
-      transition: border-color .2s;
-    }
-    .travel-form .form-control:focus {
-      background: rgba(255,255,255,.1);
-      border-color: var(--surf);
-      box-shadow: none;
-      color: var(--white);
-    }
-    .travel-form .form-control::placeholder { color: rgba(255,255,255,.3); }
-    .travel-form label {
-      font-size: .72rem;
-      letter-spacing: .12em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,.45);
-      margin-bottom: .4rem;
-    }
-    .travel-form select.form-control option { background: var(--deep); }
-
-    /* ── FOOTER ── */
-    footer {
-      background: #071e2b;
-      color: rgba(255,255,255,.4);
-      padding: 2.5rem 0;
-      font-size: .8rem;
-      border-top: 1px solid rgba(77,184,212,.12);
-    }
-    footer .brand-foot {
-      font-family: 'Playfair Display', serif;
-      color: var(--surf);
-      font-size: 1.2rem;
-    }
-    .social-link {
-      color: rgba(255,255,255,.35);
-      font-size: 1rem;
-      margin-left: 1.1rem;
-      transition: color .2s;
-    }
-    .social-link:hover { color: var(--surf); }
-
-    /* ── SCROLL ANIM ── */
-    .reveal {
-      opacity: 0;
-      transform: translateY(30px);
-      transition: opacity .7s ease, transform .7s ease;
-    }
-    .reveal.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  </style>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
-<!-- NAVBAR -->
 <nav class="navbar navbar-expand-lg" id="mainNav">
   <div class="container">
     <a class="navbar-brand" href="#">Horizon<span>Voyages</span></a>
@@ -375,95 +27,84 @@
   </div>
 </nav>
 
-<!-- HERO -->
 <section class="hero" id="home">
   <div class="container hero-inner">
     <div class="row">
       <div class="col-12 col-lg-8">
-        <div class="hero-tag"><i class="fas fa-compass me-2"></i>Curated World Travel</div>
+        <div class="hero-pill"><i class="fas fa-compass me-2"></i>Curated World Travel</div>
         <h1>Find Your Next<br><em>Great Adventure</em></h1>
         <p class="lead">We design bespoke journeys to the world's most extraordinary destinations — from alpine escapes to sun-drenched coastlines.</p>
-        <a href="#destinations" class="btn btn-sky me-2">Explore Destinations</a>
-        <a href="#contact" class="btn btn-outline-sky ms-1">Plan My Trip</a>
+        <a href="#destinations" class="btn-dusk me-2">Explore Destinations</a>
+        <a href="#contact" class="btn-ghost">Plan My Trip</a>
       </div>
     </div>
   </div>
 </section>
 
-<!-- DESTINATIONS -->
 <section id="destinations">
   <div class="container">
     <div class="text-center mb-5 reveal">
-      <span class="section-label">Where Will You Go?</span>
-      <h2 class="section-heading">Featured Destinations</h2>
-      <div class="divider mx-auto"></div>
-      <p class="text-muted" style="max-width:500px;margin:0 auto;font-size:.9rem;line-height:1.8;">Hand-picked locations where culture, nature, and wonder converge.</p>
+      <span class="eyebrow">Where Will You Go?</span>
+      <h2 class="section-title">Featured Destinations</h2>
+      <div class="divider center"></div>
+      <p class="text-muted" style="max-width:500px; margin:0 auto; font-size:.9rem; line-height:1.8;">Hand-picked locations where culture, nature, and wonder converge.</p>
     </div>
     <div class="row g-4">
-
-      <!-- Dest 1 -->
       <div class="col-12 col-md-6 col-lg-4 reveal">
-        <div class="dest-card card h-100">
+        <div class="dest-card card">
           <div class="img-wrap">
-            <img src="https://images.unsplash.com/photo-1527631746610-bca00a040d60?w=600&q=80" alt="Santorini"/>
+            <img src="https://images.unsplash.com/photo-1527631746610-bca00a040d60?w=600&q=80" alt="Santorini" />
             <span class="dest-badge">Greece</span>
           </div>
           <div class="card-body">
             <h5 class="card-title">Santorini</h5>
             <p class="card-text">Volcanic caldera views, whitewashed villages perched on clifftops, and legendary Aegean sunsets await on this iconic island.</p>
-            <a href="#" class="btn-link-dest">Learn More <i class="fas fa-arrow-right ms-1" style="font-size:.65rem"></i></a>
+            <a href="#" class="learn-more">Learn More <i class="fas fa-arrow-right ms-1" style="font-size:.62rem"></i></a>
           </div>
         </div>
       </div>
-
-      <!-- Dest 2 -->
       <div class="col-12 col-md-6 col-lg-4 reveal" style="transition-delay:.12s">
-        <div class="dest-card card h-100">
+        <div class="dest-card card">
           <div class="img-wrap">
-            <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600&q=80" alt="Swiss Alps"/>
+            <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600&q=80" alt="Swiss Alps" />
             <span class="dest-badge">Switzerland</span>
           </div>
           <div class="card-body">
             <h5 class="card-title">Swiss Alps</h5>
             <p class="card-text">Pristine mountain landscapes, luxury chalets, and world-class skiing make the Swiss Alps an unrivalled escape year-round.</p>
-            <a href="#" class="btn-link-dest">Learn More <i class="fas fa-arrow-right ms-1" style="font-size:.65rem"></i></a>
+            <a href="#" class="learn-more">Learn More <i class="fas fa-arrow-right ms-1" style="font-size:.62rem"></i></a>
           </div>
         </div>
       </div>
-
-      <!-- Dest 3 -->
       <div class="col-12 col-md-6 col-lg-4 reveal" style="transition-delay:.22s">
-        <div class="dest-card card h-100">
+        <div class="dest-card card">
           <div class="img-wrap">
-            <img src="https://images.unsplash.com/photo-1555400038-63f5ba517a47?w=600&q=80" alt="Kyoto"/>
+            <img src="https://images.unsplash.com/photo-1555400038-63f5ba517a47?w=600&q=80" alt="Kyoto" />
             <span class="dest-badge">Japan</span>
           </div>
           <div class="card-body">
             <h5 class="card-title">Kyoto</h5>
             <p class="card-text">Ancient temples, bamboo groves, geisha districts, and the timeless beauty of cherry blossoms make Kyoto utterly unforgettable.</p>
-            <a href="#" class="btn-link-dest">Learn More <i class="fas fa-arrow-right ms-1" style="font-size:.65rem"></i></a>
+            <a href="#" class="learn-more">Learn More <i class="fas fa-arrow-right ms-1" style="font-size:.62rem"></i></a>
           </div>
         </div>
       </div>
-
     </div>
   </div>
 </section>
 
-<!-- TOURS -->
 <section id="tours">
   <div class="container">
     <div class="row g-5 align-items-start">
       <div class="col-12 col-lg-4 reveal">
-        <span class="section-label">Tour Packages</span>
-        <h2 class="section-heading">Explore Our Journeys</h2>
+        <span class="eyebrow">Tour Packages</span>
+        <h2 class="section-title">Explore Our Journeys</h2>
         <div class="divider"></div>
-        <p style="font-size:.9rem;color:var(--muted);line-height:1.85;">Each tour is thoughtfully crafted with expert guides, premium accommodation, and all-in pricing so you can focus entirely on the experience.</p>
+        <p style="font-size:.9rem; color:var(--muted); line-height:1.85;">Each tour is thoughtfully crafted with expert guides, premium accommodation, and all-in pricing so you can focus entirely on the experience.</p>
       </div>
       <div class="col-12 col-lg-8 reveal" style="transition-delay:.12s">
         <div class="accordion" id="toursAccordion">
 
-          <!-- Tour 1 -->
           <div class="accordion-item">
             <h2 class="accordion-header">
               <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#tour1">
@@ -473,9 +114,9 @@
             <div id="tour1" class="accordion-collapse collapse show" data-bs-parent="#toursAccordion">
               <div class="accordion-body">
                 <div class="tour-meta">
-                  <span class="tour-meta-item"><i class="fas fa-clock"></i>10 Days</span>
-                  <span class="tour-meta-item"><i class="fas fa-users"></i>Max 12 Guests</span>
-                  <span class="tour-meta-item"><i class="fas fa-tag"></i>From €2,890</span>
+                  <span><i class="fas fa-clock"></i>10 Days</span>
+                  <span><i class="fas fa-users"></i>Max 12 Guests</span>
+                  <span><i class="fas fa-tag"></i>From €2,890</span>
                 </div>
                 Island-hop through Mykonos, Santorini, and Crete. Sail the crystal Aegean, explore Minoan ruins, and dine on rooftops overlooking the caldera. Private yacht access included for three nights.
                 <br><a href="#">View Details →</a>
@@ -483,7 +124,6 @@
             </div>
           </div>
 
-          <!-- Tour 2 -->
           <div class="accordion-item">
             <h2 class="accordion-header">
               <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#tour2">
@@ -493,9 +133,9 @@
             <div id="tour2" class="accordion-collapse collapse" data-bs-parent="#toursAccordion">
               <div class="accordion-body">
                 <div class="tour-meta">
-                  <span class="tour-meta-item"><i class="fas fa-clock"></i>7 Days</span>
-                  <span class="tour-meta-item"><i class="fas fa-users"></i>Max 8 Guests</span>
-                  <span class="tour-meta-item"><i class="fas fa-tag"></i>From €3,450</span>
+                  <span><i class="fas fa-clock"></i>7 Days</span>
+                  <span><i class="fas fa-users"></i>Max 8 Guests</span>
+                  <span><i class="fas fa-tag"></i>From €3,450</span>
                 </div>
                 Ski-in/ski-out chalet in Verbier, guided backcountry tours, après-ski fondue dinners, and a private helicopter glacier flight. The ultimate alpine luxury experience.
                 <br><a href="#">View Details →</a>
@@ -503,7 +143,6 @@
             </div>
           </div>
 
-          <!-- Tour 3 -->
           <div class="accordion-item">
             <h2 class="accordion-header">
               <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#tour3">
@@ -513,9 +152,9 @@
             <div id="tour3" class="accordion-collapse collapse" data-bs-parent="#toursAccordion">
               <div class="accordion-body">
                 <div class="tour-meta">
-                  <span class="tour-meta-item"><i class="fas fa-clock"></i>14 Days</span>
-                  <span class="tour-meta-item"><i class="fas fa-users"></i>Max 10 Guests</span>
-                  <span class="tour-meta-item"><i class="fas fa-tag"></i>From €4,200</span>
+                  <span><i class="fas fa-clock"></i>14 Days</span>
+                  <span><i class="fas fa-users"></i>Max 10 Guests</span>
+                  <span><i class="fas fa-tag"></i>From €4,200</span>
                 </div>
                 Tokyo to Kyoto via bullet train, traditional ryokan stays, tea ceremony workshops, bamboo forest walks at dawn, and a private audience with a master sushi chef.
                 <br><a href="#">View Details →</a>
@@ -523,7 +162,6 @@
             </div>
           </div>
 
-          <!-- Tour 4 -->
           <div class="accordion-item" style="border-bottom:none">
             <h2 class="accordion-header">
               <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#tour4">
@@ -533,9 +171,9 @@
             <div id="tour4" class="accordion-collapse collapse" data-bs-parent="#toursAccordion">
               <div class="accordion-body">
                 <div class="tour-meta">
-                  <span class="tour-meta-item"><i class="fas fa-clock"></i>12 Days</span>
-                  <span class="tour-meta-item"><i class="fas fa-users"></i>Max 6 Guests</span>
-                  <span class="tour-meta-item"><i class="fas fa-tag"></i>From €5,100</span>
+                  <span><i class="fas fa-clock"></i>12 Days</span>
+                  <span><i class="fas fa-users"></i>Max 6 Guests</span>
+                  <span><i class="fas fa-tag"></i>From €5,100</span>
                 </div>
                 Trek the W Circuit in Torres del Paine, kayak among glaciers, spot pumas in the wild, and sleep under the southern hemisphere's most extraordinary starry skies.
                 <br><a href="#">View Details →</a>
@@ -549,14 +187,13 @@
   </div>
 </section>
 
-<!-- CONTACT -->
 <section id="contact">
   <div class="container">
     <div class="row justify-content-center mb-5">
       <div class="col-12 col-lg-6 text-center reveal">
-        <span class="section-label">Start Planning</span>
-        <h2 class="section-heading">Tell Us Your Dream Trip</h2>
-        <div class="divider mx-auto" style="background:rgba(77,184,212,.4)"></div>
+        <span class="eyebrow">Start Planning</span>
+        <h2 class="section-title">Tell Us Your Dream Trip</h2>
+        <div class="divider center" style="background:rgba(77,184,212,.4)"></div>
         <p>Our travel specialists will craft a personalised itinerary tailored to your interests and schedule.</p>
       </div>
     </div>
@@ -564,15 +201,15 @@
       <div class="col-12 col-md-8 col-lg-6 reveal" style="transition-delay:.1s">
         <form class="travel-form">
           <div class="row g-3">
-            <div class="col-12 col-sm-6 mb-1">
+            <div class="col-12 col-sm-6">
               <label>Full Name</label>
-              <input type="text" class="form-control" placeholder="Your name"/>
+              <input type="text" class="form-control" placeholder="Your name" />
             </div>
-            <div class="col-12 col-sm-6 mb-1">
+            <div class="col-12 col-sm-6">
               <label>Email Address</label>
-              <input type="email" class="form-control" placeholder="you@example.com"/>
+              <input type="email" class="form-control" placeholder="you@example.com" />
             </div>
-            <div class="col-12 mb-1">
+            <div class="col-12">
               <label>Destination of Interest</label>
               <select class="form-control">
                 <option value="" disabled selected>Select a destination…</option>
@@ -583,12 +220,12 @@
                 <option>Other / Not Sure Yet</option>
               </select>
             </div>
-            <div class="col-12 mb-1">
+            <div class="col-12">
               <label>Your Message</label>
               <textarea class="form-control" rows="5" placeholder="Tell us about your dream trip, travel dates, group size…"></textarea>
             </div>
             <div class="col-12 text-center mt-2">
-              <button type="submit" class="btn btn-sky px-5">Send My Enquiry</button>
+              <button type="submit" class="btn-dusk px-5">Send My Enquiry</button>
             </div>
           </div>
         </form>
@@ -597,7 +234,6 @@
   </div>
 </section>
 
-<!-- FOOTER -->
 <footer>
   <div class="container">
     <div class="row align-items-center">
@@ -619,16 +255,18 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
 <script>
-  // Sticky navbar
   window.addEventListener('scroll', () => {
     document.getElementById('mainNav').classList.toggle('scrolled', window.scrollY > 60);
   });
 
-  // Scroll reveal
   const observer = new IntersectionObserver(entries => {
-    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-  }, { threshold: .15 });
+    entries.forEach(e => {
+      if (e.isIntersecting) e.target.classList.add('visible');
+    });
+  }, { threshold: 0.15 });
+
   document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 </script>
+
 </body>
 </html>
